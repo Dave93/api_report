@@ -3,6 +3,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AdminModule } from '@admin/admin.module';
 import { AuthModule } from '@modules/auth/auth.module';
 import { DatabaseModule } from '@database/database.module';
+import { TerminalsModule } from '@modules/terminals/terminals.module';
+import { OrdersModule } from '@modules/orders/orders.module';
+import { ReviewsModule } from '@modules/reviews/reviews.module';
 
 @Module({
   imports: [
@@ -12,6 +15,9 @@ import { DatabaseModule } from '@database/database.module';
     DatabaseModule,
     AdminModule,
     AuthModule,
+    TerminalsModule,
+    OrdersModule,
+    ReviewsModule,
   ],
 })
 export class AppModule {

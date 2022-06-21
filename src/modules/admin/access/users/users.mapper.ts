@@ -16,6 +16,8 @@ export class UserMapper {
     dto.lastName = entity.lastName;
     dto.status = entity.status;
     dto.isSuperUser = entity.isSuperUser;
+    dto.iiko_terminal_id = entity.iiko_terminal_id;
+    dto.project = entity.project;
     return dto;
   }
 
@@ -30,6 +32,7 @@ export class UserMapper {
     dto.roles = await Promise.all((await entity.roles).map(RoleMapper.toDtoWithRelations));
     dto.isSuperUser = entity.isSuperUser;
     dto.status = entity.status;
+    dto.iiko_terminal_id = entity.iiko_terminal_id;
     return dto;
   }
 
@@ -42,6 +45,8 @@ export class UserMapper {
     entity.permissions = Promise.resolve(dto.permissions.map((id) => new PermissionEntity({ id })));
     entity.roles = Promise.resolve(dto.roles.map((id) => new RoleEntity({ id })));
     entity.status = UserStatus.Active;
+    entity.iiko_terminal_id = dto.iiko_terminal_id;
+    entity.project = dto.project;
     entity.isSuperUser = false;
     return entity;
   }
@@ -53,6 +58,7 @@ export class UserMapper {
     entity.permissions = Promise.resolve(dto.permissions.map((id) => new PermissionEntity({ id })));
     entity.roles = Promise.resolve(dto.roles.map((id) => new RoleEntity({ id })));
     entity.status = dto.status;
+    entity.iiko_terminal_id = dto.iiko_terminal_id;
     return entity;
   }
 }

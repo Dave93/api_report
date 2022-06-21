@@ -12,6 +12,7 @@ import { DBErrorCode } from '@common/enums';
 import { UserMapper } from './users.mapper';
 import { HashHelper } from '@helpers';
 import { TimeoutError } from 'rxjs';
+import {SetSuperUserRequestDto} from "@admin/access/users/dtos/update-user-request.dto";
 
 @Injectable()
 export class UsersService {
@@ -122,6 +123,36 @@ export class UsersService {
     }
   }
 
+  /**
+   * Update User by id
+   * @param id {string}
+   * @param userDto {UpdateUserRequestDto}
+   * @returns {Promise<UserResponseDto>}
+   */
+  public async setSuperUser(id: string, userDto: SetSuperUserRequestDto): Promise<UserResponseDto> {
+    let userEntity = await this.usersRepository.findOne(id);
+    if (!userEntity) {
+      throw new NotFoundException();
+    }
+
+    try {
+      userEntity.isSuperUser = userDto.isSuperUser;
+      userEntity = await this.usersRepository.save(userEntity);
+      return UserMapper.toDto(userEntity);
+    } catch (error) {
+      if (
+          error.code == DBErrorCode.PgForeignKeyConstraintViolation ||
+          error.code == DBErrorCode.PgNotNullConstraintViolation
+      ) {
+        throw new ForeignKeyConflictException();
+      }
+      if (error instanceof TimeoutError) {
+        throw new RequestTimeoutException();
+      } else {
+        throw new InternalServerErrorException();
+      }
+    }
+  }
   /**
    * Change user password
    * @param changePassword {ChangePasswordRequestDto}

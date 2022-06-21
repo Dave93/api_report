@@ -12,12 +12,13 @@ export class UsersRepository extends Repository<UserEntity> {
   public async getUsersAndCount(
     pagination: PaginationRequest,
   ): Promise<[userEntities: UserEntity[], totalUsers: number]> {
-    const {
+    let {
       skip,
       limit: take,
       order,
       params: { search },
     } = pagination;
+take = 200;
     const query = this.createQueryBuilder('u')
       .innerJoinAndSelect('u.roles', 'r')
       .leftJoinAndSelect('u.permissions', 'p')

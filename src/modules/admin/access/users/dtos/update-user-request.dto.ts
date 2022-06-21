@@ -41,4 +41,17 @@ export class UpdateUserRequestDto {
     example: UserStatus.Active,
   })
   status: UserStatus;
+  @ApiProperty()
+  iiko_terminal_id: string;
+  
+}
+
+
+export class SetSuperUserRequestDto {
+
+  @IsNotEmpty()
+  @ApiProperty({
+    example: 'true',
+  })
+  isSuperUser: boolean;
 }

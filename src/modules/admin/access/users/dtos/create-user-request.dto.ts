@@ -44,4 +44,10 @@ export class CreateUserRequestDto {
   @IsArray()
   @IsInt({ each: true })
   roles: number[];
+
+  @ApiProperty({ example: "a6cceb18-35fb-4bb0-ab4a-af6554f7a886" })
+  iiko_terminal_id: string;
+
+  @ApiProperty({ example: "a6cceb18-35fb-4bb0-ab4a-af6554f7a886" })
+  project: string;
 }

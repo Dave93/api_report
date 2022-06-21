@@ -12,6 +12,6 @@ services:
     ports:
       - ${TYPEORM_PORT}:5432
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - ./db_data:/var/lib/postgresql/data
 volumes:
   pgdata:

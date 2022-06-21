@@ -88,6 +88,19 @@ export class UserEntity extends BaseEntity {
     },
   })
   permissions: Promise<PermissionEntity[]>;
+  @Column({
+    name: 'iiko_terminal_id',
+    type: 'varchar',
+    nullable: true,
+  })
+  iiko_terminal_id: string;
+
+  @Column({
+    name: 'project',
+    type: 'varchar',
+    nullable: true,
+  })
+  project: string;
 
   constructor(user?: Partial<UserEntity>) {
     super();

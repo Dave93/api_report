@@ -6,6 +6,7 @@ import { CurrentUser, Permissions, TOKEN_NAME } from '@auth';
 import { ApiGlobalResponse } from '@common/decorators';
 import { UsersService } from './users.service';
 import { UserEntity } from './user.entity';
+import {SetSuperUserRequestDto} from "@admin/access/users/dtos/update-user-request.dto";
 
 @ApiTags('Users')
 @ApiBearerAuth(TOKEN_NAME)
@@ -68,5 +69,17 @@ export class UsersController {
     @CurrentUser() user: UserEntity,
   ): Promise<UserResponseDto> {
     return this.usersService.changePassword(changePassword, user.id);
+  }
+
+  @ApiOperation({ description: 'Update user by id' })
+  @ApiGlobalResponse(UserResponseDto)
+  @ApiConflictResponse({ description: 'User already exists' })
+  @Permissions('admin.access.users.update')
+  @Put('/set_super_user/:id')
+  public setSuperUser(
+      @Param('id', ParseUUIDPipe) id: string,
+      @Body(ValidationPipe) UserDto: SetSuperUserRequestDto,
+  ): Promise<UserResponseDto> {
+    return this.usersService.setSuperUser(id, UserDto);
   }
 }

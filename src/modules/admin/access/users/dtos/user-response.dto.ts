@@ -27,4 +27,10 @@ export class UserResponseDto {
 
   @ApiProperty()
   status: UserStatus;
+
+  @ApiProperty()
+  iiko_terminal_id: string;
+
+  @ApiProperty()
+  project: string;
 }
