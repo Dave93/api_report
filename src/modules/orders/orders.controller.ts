@@ -3195,6 +3195,18 @@ export class OrdersController {
                                 "should": [
                                     {
                                         "match_phrase": {
+                                            "project": ReportPeriod.project
+                                        }
+                                    }
+                                ],
+                                "minimum_should_match": 1
+                            }
+                        },
+                        {
+                            "bool": {
+                                "should": [
+                                    {
+                                        "match_phrase": {
                                             "city_slug": "tashkent"
                                         }
                                     }
@@ -3287,6 +3299,18 @@ export class OrdersController {
                                     {
                                         "match_phrase": {
                                             "iiko_id": ReportPeriod.terminal
+                                        }
+                                    }
+                                ],
+                                "minimum_should_match": 1
+                            }
+                        },
+                        {
+                            "bool": {
+                                "should": [
+                                    {
+                                        "match_phrase": {
+                                            "project": ReportPeriod.project
                                         }
                                     }
                                 ],
