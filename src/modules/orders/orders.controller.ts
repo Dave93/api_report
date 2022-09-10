@@ -3195,7 +3195,7 @@ export class OrdersController {
                                 "should": [
                                     {
                                         "match_phrase": {
-                                            "project": ReportPeriod.project
+                                            "project": ReportPeriod.brand
                                         }
                                     }
                                 ],
@@ -3310,7 +3310,7 @@ export class OrdersController {
                                 "should": [
                                     {
                                         "match_phrase": {
-                                            "project": ReportPeriod.project
+                                            "project": ReportPeriod.brand
                                         }
                                     }
                                 ],

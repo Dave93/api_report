@@ -18,4 +18,5 @@ export class ReportPeriodRequestDto {
 
   project?: string;
 
+  brand?: string;
 }
